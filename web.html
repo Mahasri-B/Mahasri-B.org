@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Code X - Discord Bot</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(135deg,#DDF6D2,#CAE8BD);color:#2e2e2e;overflow-x:hidden;}
+body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 30%, rgba(176,219,156,0.4), transparent 60%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3), transparent 60%);animation:moveBg 10s ease-in-out infinite alternate;z-index:-1;}
+@keyframes moveBg{0%{background-position:20% 30%,80% 70%;}100%{background-position:25% 35%,75% 65%;}}
+nav{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:15px 40px;background:rgba(255,255,255,0.2);backdrop-filter:blur(12px);z-index:999;}
+nav .logo{font-weight:700;font-size:1.5rem;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav ul li a{color:#2e2e2e;text-decoration:none;font-weight:600;transition:color 0.3s;}
+nav ul li a.active, nav ul li a:hover{color:#88d3bd;cursor:pointer;}
+header, section{padding:60px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:translateY(30px);transition:all 0.8s ease; max-width:900px;margin:auto;}
+header.show, section.show{opacity:1;transform:translateY(0);}
+h1{font-size:3rem;font-weight:700;margin-bottom:20px;text-align:center;}
+h2{font-size:2rem;margin-bottom:15px;text-align:center;}
+p{max-width:500px;margin:auto;font-size:1.1rem;line-height:1.6;margin-top:10px;text-align:center;}
+.shimmer-button{position:relative;padding:12px 35px;font-size:1.1rem;font-weight:bold;color:white;background:#B0DB9C;border:none;border-radius:50px;cursor:pointer;overflow:hidden;margin-top:20px;box-shadow:0 0 15px rgba(176,219,156,0.6);transition:transform 0.3s ease;}
+.shimmer-button:hover{transform:scale(1.05);}
+.shimmer-button::before{content:"";position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);transform:skewX(-25deg);}
+.shimmer-button:hover::before{animation:shimmer 1.5s infinite;}
+@keyframes shimmer{0%{left:-75%;}100%{left:125%;}}
+.features{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;margin-top:20px;}
+.glass-box{background:rgba(255,255,255,0.25);backdrop-filter:blur(15px);border-radius:15px;padding:20px;box-shadow:0 8px 25px rgba(0,0,0,0.2);transition:transform 0.3s ease;flex:1;min-width:200px;max-width:250px;text-align:center;}
+.glass-box:hover{transform:translateY(-5px) scale(1.02);}
+.about-container{display:flex;align-items:center;flex-wrap:wrap;gap:20px;max-width:900px;margin:auto;text-align:left;justify-content:center;}
+.about-image{flex:1;min-width:150px;}
+.about-image img{width:100%;max-width:250px;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.2);transition:transform 0.4s ease,box-shadow 0.4s ease;}
+.about-image img:hover{transform:perspective(800px) rotateY(8deg) scale(1.02);box-shadow:0 12px 35px rgba(0,0,0,0.3);}
+.about-text{flex:2;min-width:200px;}
+.about-text h2{font-size:1.8rem;margin-bottom:10px;color:#2e2e2e;text-align:center;}
+.about-text p{font-size:1rem;line-height:1.5;color:#3e3e3e;margin-bottom:10px;text-align:center;}
+.contact-box{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:400px;margin:auto;}
+footer{font-size:0.8rem;padding:20px;text-align:center;color:#555;margin-top:40px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">CODE X</div>
+  <ul>
+    <li><a onclick="scrollToSection('home')" class="nav-link active">Home</a></li>
+    <li><a onclick="scrollToSection('features')" class="nav-link">Features</a></li>
+    <li><a onclick="scrollToSection('commands')" class="nav-link">Commands</a></li>
+    <li><a onclick="scrollToSection('about')" class="nav-link">About</a></li>
+    <li><a onclick="scrollToSection('contact')" class="nav-link">Contact</a></li>
+  </ul>
+</nav>
+
+<header id="home" class="show">
+  <h1>CODE X</h1>
+  <p>The ultimate Discord bot for smart commands, sleek design, and powerful automation — perfect for your server.</p>
+  <button class="shimmer-button" onclick="inviteBot()">INVITE CODE - X NOW</button>
+</header>
+
+<section id="features">
+  <h2>Features</h2>
+  <div class="features">
+    <div class="glass-box"><h3>Fast Responses</h3><p>Instant replies to your commands with minimal delay.</p></div>
+    <div class="glass-box"><h3>Simple Commands</h3><p>Effortless control over moderation, tasks, and commands.</p></div>
+    <div class="glass-box"><h3>Privacy First</h3><p>Unlike other bots that sell your information, we respect your privacy.</p></div>
+  </div>
+</section>
+
+<section id="commands">
+  <h2>Commands</h2>
+  <div class="features">
+    <div class="glass-box"><h3>/kick</h3><p>Kick a member instantly.</p></div>
+    <div class="glass-box"><h3>/ban</h3><p>Ban users with reason logging.</p></div>
+    <div class="glass-box"><h3>/play</h3><p>Play music from YouTube or Spotify.</p></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-container">
+    <div class="about-image"><img src="https://files.catbox.moe/kav71t.png" alt="Code X Bot"></div>
+    <div class="about-text">
+      <h2>About Code X</h2>
+      <p>Code X is not just another Discord bot — it’s your all-in-one automation, moderation, and entertainment solution.</p>
+      <p>With powerful features, a user-friendly interface, and complete privacy protection, Code X is the perfect companion for your server’s success.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box">
+    <h2>Contact</h2>
+    <p>Want to suggest a feature or report a bug? Reach out to us anytime! support@codex@gmail.com</p>
+  </div>
+</section>
+
+<footer>&copy; 2025 Code X. All Rights Reserved.</footer>
+
+<script>
+function inviteBot(){
+    window.open("https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=8&scope=bot","_blank");
+}
+
+// Fade-in when section enters viewport
+const sections = document.querySelectorAll('header, section');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    } else {
+      entry.target.classList.remove('show');
+    }
+  });
+},{threshold:0.2});
+sections.forEach(sec => observer.observe(sec));
+
+// Scroll to section
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth', block:'center'});
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
